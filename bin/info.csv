@@ -1,6 +1,7 @@
-IdCuenta,propetario,id´propetario,saldo
+IdCuenta,propietario,idpropietario,saldo (esta linea no afecta el codigo)
 111,Luis,909,1000
-666,francisco,343,9292
+666,Francisco,343,9292
 333,Andrea,345,9977
 888,Arturo,544,8768
 999,Ileana,743,3333
+7,ja
