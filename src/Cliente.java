@@ -1,21 +1,23 @@
 public class Cliente {
-    private String name;
+    public String name;
     private Cuenta a;
     private int Id;
     
-    public Cliente(String nombre){
+    public Cliente(String nombre, Cuenta x, int id){
         this.name = nombre;
-        this.Id = asignateId(); 
+        this.Id = id;
     }
     
-    private int asignateId(){
+    
+    
+    /*private int asignateId(){
     int jajas;
     
     jajas=(int)(Math.random()*900 + 100);
     
     
     return jajas;
-    }
+    }*/
     
     
 }
