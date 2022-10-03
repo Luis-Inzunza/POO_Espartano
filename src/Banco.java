@@ -52,6 +52,26 @@ public class Banco {
         return x;
     }
 
+    //Metodos de prueba de transacciones
+    public void deposito(int depositante, int depositorio, int cantidad){
+        Transaccion a = new Transaccion(depositante,depositorio,cantidad);
+        if(a.Revision()){
+            a.realiza_trans();
+            a.registro(true);
+        }else{
+            a.registro(false);
+        }
+        
+    }
+
+    public void retiro(int depositante, int depositorio, int cantidad){
+        
+    }
+
+    public void transferencia(int depositante, int depositorio, int cantidad){
+        
+    }
+
     public String toString(){
         return "El Banco " + this.Name + " Tiene un total de " + this.clientes + " clientes, con cuentas " + this.cuentas +" en total y un registro de " + this.transacciones + " trancacciones en total";
     }
