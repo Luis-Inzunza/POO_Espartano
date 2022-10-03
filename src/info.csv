@@ -1,6 +1,6 @@
-IdCuenta,propietario,idpropietario,saldo
-111,Luis,909,1000
-666,Francisco,343,9292
-333,Andrea,345,9977
-888,Arturo,544,8768
-999,Ileana,743,3333
+Nombre,ID_propetario,ID_Cuenta,saldo (no borrar esta linea)
+Luis,090,233,1020
+Francisco,123,345,2344
+Andrea,378,567,5677
+Arturo,345,678,6049
+Ileana,466,789,3453
