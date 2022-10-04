@@ -8,9 +8,10 @@ public class Banco {
     private Cliente cliente2;
     private Cliente cliente3;
     private Cliente cliente4;
+    private Cliente cliente5;
     private int clientes =4;
     private int cuentas = 4;
-    private int transacciones = Trans();
+    private int transacciones;
     
     
     public Banco(String name) throws FileNotFoundException{
@@ -19,6 +20,8 @@ public class Banco {
         this.cliente2 = Datos(2);
         this.cliente3 = Datos(3);
         this.cliente4 = Datos(4);
+        this.cliente5 = Datos(5);
+        this.transacciones= Trans();
     }
 
     private Cliente Datos(int no_cliente) throws FileNotFoundException{
@@ -53,23 +56,90 @@ public class Banco {
     }
 
     //Metodos de prueba de transacciones
-    public void deposito(int depositante, int depositorio, int cantidad){
+    public void Accion(int depositante, int depositorio, int cantidad , String tipo) throws FileNotFoundException{
         Transaccion a = new Transaccion(depositante,depositorio,cantidad);
+        boolean saldo_suficiente= false;
         if(a.Revision()){
-            a.realiza_trans();
-            a.registro(true);
+            switch(tipo){
+                case "tranferencia":
+                    saldo_suficiente = realiza_transaccion(depositante,depositorio,cantidad);
+                    break;
+                case "deposito":
+                    saldo_suficiente = realiza_deposito(depositante,cantidad);
+                    break;
+                case "retiro":
+                    saldo_suficiente = realiza_retiro(depositante,cantidad);
+                    break;
+            }
+            if(saldo_suficiente){
+                a.registro("exitoso");
+            }else{
+                a.registro("Sin saldo");
+            }
         }else{
-            a.registro(false);
+            a.registro("Una cuenta no encontrada");
         }
+    }
+    
+    public boolean realiza_transaccion(int depositante, int depositorio, int cantidad) throws FileNotFoundException{
+        //realiza la transferencia
+        Cliente Dara = buscarCuentas(depositante);
+        Cliente Recibe = buscarCuentas(depositorio);
+        boolean paso = false;
+
+        if(Dara.dar_cuenta().dar_saldo() >= cantidad){
+            Dara.dar_cuenta().descontar(cantidad);
+            Recibe.dar_cuenta().Recibir(cantidad);
+            paso = true;
+        }
+
+        return paso;
         
     }
 
-    public void retiro(int depositante, int depositorio, int cantidad){
+    public boolean realiza_retiro(int Retirante, int cantidad) throws FileNotFoundException{
+        Cliente Retirara = buscarCuentas(Retirante);
+        boolean paso = false;
+
+        if(Retirara.dar_cuenta().dar_saldo() >= cantidad){
+            Retirara.dar_cuenta().descontar(cantidad);
+            paso = true;
+        }
+
+        return paso;
         
     }
 
-    public void transferencia(int depositante, int depositorio, int cantidad){
+    public boolean realiza_deposito(int depositante, int cantidad) throws FileNotFoundException{
+        //realiza la transferencia
+        Cliente Dar = buscarCuentas(depositante);
+        boolean paso = true;
+        Dar.dar_cuenta().Recibir(cantidad);
+
+        return paso;
         
+    }
+
+    private Cliente buscarCuentas(int a){
+        Cliente guardar = null;
+        if(cliente1.dar_cuenta().dar_id() == a ){
+            guardar = cliente1;
+        }
+        if(cliente2.dar_cuenta().dar_id() == a ){
+            guardar = cliente2;
+        }
+        if(cliente3.dar_cuenta().dar_id() == a ){
+            guardar = cliente3;
+        }
+        if(cliente4.dar_cuenta().dar_id() == a ){
+            guardar = cliente4;
+        }
+        if(cliente5.dar_cuenta().dar_id() == a ){
+            guardar = cliente5;
+        }
+
+        return guardar;
+
     }
 
     public String toString(){
@@ -78,7 +148,7 @@ public class Banco {
 
     public String toString_Especifico(){
 
-        return toString() + "\n" + "Especificamente estos clientes" + "\n"  + cliente1.toString() + "\n" + cliente2.toString() + "\n" + cliente3.toString() + "\n" + cliente4.toString() + "\n";
+        return toString() + "\n" + "Especificamente estos clientes" + "\n"  + cliente1.toString() + "\n" + cliente2.toString() + "\n" + cliente3.toString() + "\n" + cliente4.toString() + "\n" + cliente5.toString() + "\n";
     }
     
 }// fin de clase

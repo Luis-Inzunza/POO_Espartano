@@ -6,9 +6,8 @@ public class Main {
         System.out.println(Mazapan.toString_Especifico());
 
         //Por el momento no hay ningun metodo de seguridad
-        Mazapan.deposito(909,234,1000);
-        Mazapan.retiro(909,234,1000);
-        Mazapan.transferencia(909,234,1000);
-
+        Mazapan.Accion(233,345,1000,"deposito");
+        Mazapan.Accion(909,234,1000,"retiro");
+        Mazapan.Accion(909,234,1000,"transferencia");
     }
 }

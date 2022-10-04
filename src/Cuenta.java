@@ -16,5 +16,25 @@ public class Cuenta {
     public String toString(){
         return "Id de cuenta: " + Id_cuenta +  ",Saldo: "+ saldo + ", Id cliente: " + Id_cliente ;
     }
+
+    public int dar_id(){
+        return this.Id_cuenta;
+    }
+
+    public int dar_idcliente(){
+    return this.Id_cliente;
+    }
+
+    public int dar_saldo(){
+        return this.saldo;
+    }
+
+    public void descontar( int quitar){
+        this.saldo= this.saldo - quitar;
+    }
+
+    public void Recibir( int sumado){
+        this.saldo= this.saldo + sumado;
+    }
     
 }
