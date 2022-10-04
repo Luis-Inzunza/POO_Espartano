@@ -60,28 +60,29 @@ public class Banco {
         Transaccion a = new Transaccion(depositante,depositorio,cantidad);
         boolean saldo_suficiente= false;
         if(a.Revision()){
-            switch(tipo){
-                case "tranferencia":
-                    saldo_suficiente = realiza_transaccion(depositante,depositorio,cantidad);
-                    break;
-                case "deposito":
-                    saldo_suficiente = realiza_deposito(depositante,cantidad);
-                    break;
-                case "retiro":
-                    saldo_suficiente = realiza_retiro(depositante,cantidad);
-                    break;
+            if(tipo == "transferencia"){
+                saldo_suficiente = realiza_transaccion(depositante,depositorio,cantidad);
+            }
+            if(tipo == "deposito"){
+                saldo_suficiente = realiza_deposito(depositante,cantidad);
+            }
+            if(tipo == "retiro"){
+                saldo_suficiente = realiza_retiro(depositante,cantidad);
             }
             if(saldo_suficiente){
                 a.registro("exitoso");
+                System.out.println("Accion " + tipo + " termino exitoso");
             }else{
                 a.registro("Sin saldo");
+                System.out.println("Accion " + tipo + " termino fracasando");
             }
         }else{
             a.registro("Una cuenta no encontrada");
+            System.out.println("Accion " + tipo + " termino fracasando");
         }
     }
     
-    public boolean realiza_transaccion(int depositante, int depositorio, int cantidad) throws FileNotFoundException{
+    private boolean realiza_transaccion(int depositante, int depositorio, int cantidad) throws FileNotFoundException{
         //realiza la transferencia
         Cliente Dara = buscarCuentas(depositante);
         Cliente Recibe = buscarCuentas(depositorio);
@@ -97,7 +98,7 @@ public class Banco {
         
     }
 
-    public boolean realiza_retiro(int Retirante, int cantidad) throws FileNotFoundException{
+    private boolean realiza_retiro(int Retirante, int cantidad) throws FileNotFoundException{
         Cliente Retirara = buscarCuentas(Retirante);
         boolean paso = false;
 
@@ -110,7 +111,7 @@ public class Banco {
         
     }
 
-    public boolean realiza_deposito(int depositante, int cantidad) throws FileNotFoundException{
+    private boolean realiza_deposito(int depositante, int cantidad) throws FileNotFoundException{
         //realiza la transferencia
         Cliente Dar = buscarCuentas(depositante);
         boolean paso = true;

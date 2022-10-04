@@ -13,8 +13,6 @@ public class Cliente {
         return "Nombre: " + name + ", Cuenta( " + propio.toString_cliente()+ ")" + ",Id: "+ Id ;
     }
 
-
-
     public Cuenta dar_cuenta(){
         return this.propio;
     }

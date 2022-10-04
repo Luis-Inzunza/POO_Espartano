@@ -7,7 +7,7 @@ public class Main {
 
         //Por el momento no hay ningun metodo de seguridad
         Mazapan.Accion(233,345,1000,"deposito");
-        Mazapan.Accion(909,234,1000,"retiro");
-        Mazapan.Accion(909,234,1000,"transferencia");
+        Mazapan.Accion(567,678,1000,"retiro");
+        Mazapan.Accion(678,233,1000,"transferencia");
     }
 }

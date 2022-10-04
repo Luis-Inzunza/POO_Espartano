@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,7 +11,7 @@ public class Transaccion {
     private int expedidor;
     private int destinatario;
     private int saldo;
-    private String f;
+    private String FechaHora;
 
     
     public Transaccion(int depositante, int depositorio, int cantidad){
@@ -18,7 +19,7 @@ public class Transaccion {
         this.expedidor = depositante;
         this.destinatario = depositorio;
         this.saldo = cantidad;
-        this.f = fecha();
+        this.FechaHora = fecha();
     }
 
     public boolean Revision() throws FileNotFoundException{
@@ -49,30 +50,29 @@ public class Transaccion {
         }     
     }
 
-
-    public void registro(String mensaje){
+    public void registro(String mensaje) throws FileNotFoundException{
         //genera un registro en transferencia.csv
-        String str = "Id_transaccion " + this.Id_trans + ", Estado: "+ mensaje + ",fecha: "+ this.f + ", De la cuenta: " + this.expedidor +  " con destino a " + this.destinatario + " por la cantidad de "+ this.saldo;
+        File archivo;
+        Scanner datos;
+        FileWriter escribir;
+        PrintWriter linea;
+        String renglon;
+        String str = "Id_transaccion " + Transaccion.Id_trans + ", Estado: "+ mensaje + ",fecha: "+ this.FechaHora + ", De la cuenta: " + this.expedidor +  " con destino a " + this.destinatario + " por la cantidad de "+ this.saldo;
+        archivo = new File("transacciones.csv");
+        datos = new Scanner(archivo);
         try {
-  
-            // attach a file to FileWriter
-            FileWriter fw
-                = new FileWriter("transacciones.csv");
-  
-            // read each character from string and write
-            // into FileWriter
-            for (int i = 0; i < str.length(); i++)
-                fw.write(str.charAt(i));
-  
-            System.out.println("Successfully written");
-  
-            // close the file
-            fw.close();
+            escribir = new FileWriter(archivo);
+            linea = new PrintWriter(escribir);
+            for(;datos.hasNextLine();){
+                renglon= datos.nextLine();
+            }
+            linea.println(str);
+            linea.close();
+            escribir.close();
         }
         catch (Exception e) {
             e.getStackTrace();
         }
-
     }
 
     private String fecha(){
