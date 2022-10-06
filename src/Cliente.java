@@ -1,13 +1,22 @@
 public class Cliente {
     private String name;
-    private Cuenta propio;
+    private Cuenta propio; //Private Cuenta Propias[]
+    private Cuenta propio2;
     private int Id;
     
-    public Cliente(String nombre, Cuenta x, int id){
+    public Cliente(String nombre, Cuenta x, int id){ //Cliente tiene una sola cuenta
         this.name = nombre;
         this.propio = x;
         this.Id = id;
     }
+
+    public Cliente(String nombre, Cuenta x,Cuenta y, int id){//Cliente tiene 2 contructores
+        this.name = nombre;
+        this.propio = x;
+        this.propio2 = y;
+        this.Id = id;
+    }
+
     
     public String toString(){
         return "Nombre: " + name + ", Cuenta( " + propio.toString_cliente()+ ")" + ",Id: "+ Id ;

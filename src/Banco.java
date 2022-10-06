@@ -9,8 +9,8 @@ public class Banco {
     private Cliente cliente3;
     private Cliente cliente4;
     private Cliente cliente5;
-    private int clientes =4;
-    private int cuentas = 4;
+    private int clientes=5;
+    private int cuentas=5;
     private int transacciones;
     
     
@@ -34,8 +34,8 @@ public class Banco {
         }
         String[] parte = linea.split(",");
         //asigno valores por cada datos que tenemos por linea
-        nuevo = new Cliente(parte[0],new Cuenta (Integer.parseInt(parte[2]),Integer.parseInt(parte[1]),Integer.parseInt(parte[3])),Integer.parseInt(parte[1])); //se usa la parte donde se encuentra el nombre.
-        // imprimir los valores para ver si la asignacion fue correcta
+        nuevo = new Cliente(parte[0],new Cuenta (Integer.parseInt(parte[2]),Integer.parseInt(parte[1]),Integer.parseInt(parte[3])),Integer.parseInt(parte[1]));
+        //imprimir los valores para ver si la asignacion fue correcta
         //System.out.println(nuevo.toString()); 
         datos.close();
         return nuevo;
@@ -59,7 +59,9 @@ public class Banco {
     public void Accion(int depositante, int depositorio, int cantidad , String tipo) throws FileNotFoundException{
         Transaccion a = new Transaccion(depositante,depositorio,cantidad);
         boolean saldo_suficiente= false;
-        if(a.Revision()){
+        Cliente encontrado1 = buscarCuentas(depositante);
+        Cliente encontrado2 = buscarCuentas(depositorio);
+        if(encontrado1 != null && encontrado2 != null){
             if(tipo == "transferencia"){
                 saldo_suficiente = realiza_transaccion(depositante,depositorio,cantidad);
             }

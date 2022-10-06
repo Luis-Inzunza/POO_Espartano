@@ -62,9 +62,13 @@ import java.time.format.DateTimeFormatter;
 
 ## Limitacion
 
-* Se ocupa ArrayList para que el banco tenga mas de 1 cliente los clientes tengan mas de una cuenta.
+* Se ocupa ArrayList para crear lista de objetos.
 
 * Sin uso de colections y arraylist.
+
+* El cliente solo puede tener una cuenta.
+
+* 
 
 # Archivo CSV
 
